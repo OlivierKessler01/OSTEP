@@ -11,17 +11,19 @@ void interrupt() {
 int main(int argc, char* argv[])
 {
     if(argc == 2) {
-        int size_in_bytes = atoi(argv[1]);
+        int size_in_bytes;
+        sscanf(argv[1], "%d", &size_in_bytes);
+        char* arr = malloc(size_in_bytes * sizeof(char));
         signal(SIGINT, interrupt);
-        char arr[size_in_bytes];
 
         while(keep_running) {
-            for(int i = 0; i < size_in_bytes; i++){
-                arr[i] = 'a';
-                printf("%s", arr[i]);
+            for(int i = 1; i < size_in_bytes; i++){
+                arr[i] = 't';
             }
         }
     } else {
         printf("The program need one argument, the array size in bytes.\n");
     }
+
+    return 0;
 }
